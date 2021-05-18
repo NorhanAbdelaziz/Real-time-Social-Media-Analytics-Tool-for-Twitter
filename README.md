@@ -18,15 +18,15 @@ you will have to install other packages using pip
 #I downgrade spark since pyspark 3.1.1 package (pyspark-streaming-kafka) doesn't work 
 pip install --force-reinstall pyspark==2.4.6
 
-###Run the producer using
+###Run the producer using###
 source env/bin/activate
 python producer.py
 
-###Run the consumer in other shell using
+###Run the consumer in other shell using###
 source env/bin/activate
 spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8-assembly_2.11:2.4.6  --master consumer.py
 
-###To check on kafka
+###To check on kafka###
 
 cd /usr/hdp/current/kafka-broker/bin
 ./kafka-topics.sh --create --zookeeper sandbox-hdp.hortonworks.com:2181 --replication-factor 1 --partitions 1 --topic test
@@ -34,9 +34,11 @@ cd /usr/hdp/current/kafka-broker/bin
 ./kafka-console-consumer.sh --bootstrap-server sandbox-hdp.hortonworks.com:6667 --zookeeper localhost:2181 --topic test
 #You don't have to create new topic as the producer will create the topic if it doesn't exist
 
+###Create Hive Table###
 ###You have to create a hive table with the same schema (same columns names) to add the data to
 create table case_study.test_table1(username string, tweet_id string, tweet_text string, feedback string) STORED AS parquet;
 
+###Snscrape Library###
 #Requirements to use snscrape
 Python 3.8 or higher
 The Python package dependencies are installed automatically when you install snscrape.
